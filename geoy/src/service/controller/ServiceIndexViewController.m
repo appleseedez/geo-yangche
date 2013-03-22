@@ -10,8 +10,10 @@
 #import "ServiceIndexCell.h"
 #import "UIButton+animateIcon.h"
 #import "CoreDataManager.h"
+#import "AFJSONRequestOperation.h"
+#import "Service+JSONFormat.h"
 @interface ServiceIndexViewController ()
-@property (nonatomic,weak) UIManagedDocument* databaseDocument;
+@property (nonatomic,weak,readonly) UIManagedDocument* databaseDocument;
 
 @end
 
@@ -25,7 +27,9 @@
 //    }
 //    return self;
 //}
-
+/*
+ 当列表即将呈现时.
+ */
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[self useDocument];
@@ -45,6 +49,17 @@
 }
 
 
+
+@synthesize databaseDocument = _databaseDocument;
+
+#pragma mark - getter
+- (UIManagedDocument *)databaseDocument{
+	if (_databaseDocument != nil) {
+		return _databaseDocument;
+	}
+	_databaseDocument = [CoreDataManager share].managedDocument;
+	return _databaseDocument;
+}
 
 #pragma mark - Table view data source
 //
@@ -68,7 +83,9 @@
     if (nil == cell) {
 		cell = [[ServiceIndexCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
-	
+	Service* service = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	cell.serviceTitleLabel.text = service.name;
+	cell.priceLabel.text = [NSString stringWithFormat:@"$ %@",service.price];
     return cell;
 }
 
@@ -81,7 +98,9 @@
 
 
 - (void) setupFetchResultController{
-	
+	NSFetchRequest* fetchAllServiceRequest = [NSFetchRequest fetchRequestWithEntityName:@"Service"];
+	fetchAllServiceRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchAllServiceRequest managedObjectContext:self.databaseDocument.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
 
 # pragma mark - actions
@@ -98,10 +117,11 @@
 	检查managedDocument是否状态正常 
  */
 - (void) useDocument {
-	self.databaseDocument = [CoreDataManager share].managedDocument;
+	
 	if (![[NSFileManager defaultManager] fileExistsAtPath:[self.databaseDocument.fileURL path]]) {
 		[self.databaseDocument saveToURL:self.databaseDocument.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
 			[self setupFetchResultController];
+			[self fetchServiceDataInDocument:self.databaseDocument];
 		}];
 	}else if (self.databaseDocument.documentState == UIDocumentStateClosed){
 		[self.databaseDocument openWithCompletionHandler:^(BOOL success) {
@@ -111,25 +131,58 @@
 		[self setupFetchResultController];
 	}
 }
-
-- (void) fetchServiceData{
-	
+#define JSON_URL @"https://api.mongolab.com/api/1/databases/yangche-geo/collections/services?apiKey=1gdxdp157X9xPkkGHFsH4MYBWWYaS37o"
+- (void) fetchServiceDataInDocument:(UIManagedDocument*)document{
+	AFJSONRequestOperation* fetchServiceOperation =
+	[AFJSONRequestOperation JSONRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:JSON_URL]]
+													success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+		
+														dispatch_queue_t serviceDataPersistenceQueue = dispatch_queue_create("persistence service data", NULL);
+														dispatch_async(serviceDataPersistenceQueue, ^{
+															// json数据从服务器返回了. 把它添加到本地coredata数据集合中
+															NSDictionary* serviceDataSet = JSON;
+															[document.managedObjectContext performBlock:^{
+																for (NSDictionary* serviceInfo in serviceDataSet) {
+																	[Service serviceWithJSONFormatInfo:serviceInfo inManagedObjectContext:document.managedObjectContext];
+																}
+																dispatch_async(dispatch_get_main_queue(), ^{
+																	[self.refreshButton.imageView stopAnimating];
+																	self.refreshButton.enabled = YES;
+																});
+															}];
+															
+														});
+														
+													}
+													failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+														// do the error handle
+														dispatch_async(dispatch_get_main_queue(), ^{
+															[self.refreshButton.imageView stopAnimating];
+															self.refreshButton.enabled = YES;
+															
+														});
+													}
+	];
+	self.refreshButton.enabled = NO;
+	[self.refreshButton.imageView startAnimating];
+	[fetchServiceOperation start];
 }
 
 /**
  获取数据
  */
 - (void)fetchNewData:(UIButton *)sender{
-	sender.enabled = NO;
-	[self.refreshButton.imageView startAnimating];
-	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	dispatch_async(queue, ^{
-		sleep(1);
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[self.refreshButton.imageView stopAnimating];
-			sender.enabled = YES;
-			
-		});
-	});
+//	sender.enabled = NO;
+//	
+//	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//	dispatch_async(queue, ^{
+//		sleep(1);
+//		dispatch_async(dispatch_get_main_queue(), ^{
+//			
+//			sender.enabled = YES;
+//			
+//		});
+//	});
+	NSLog(@"click");
 }
 @end

@@ -78,6 +78,7 @@
 		1858DC2C16F5E6FB0091AB6E /* ServiceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1858DC2B16F5E6FB0091AB6E /* ServiceDetailViewController.m */; };
 		1858DC2F16F5E9760091AB6E /* my-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 1858DC2D16F5E9760091AB6E /* my-tab.png */; };
 		1858DC3016F5E9760091AB6E /* my-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1858DC2E16F5E9760091AB6E /* my-tab@2x.png */; };
+		186E61C716FC180000798E15 /* Service+JSONFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E61C616FC180000798E15 /* Service+JSONFormat.m */; };
 		187BA50516F9782500438A66 /* comment-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 187BA4F516F9782500438A66 /* comment-button.png */; };
 		187BA50616F9782500438A66 /* comment-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187BA4F616F9782500438A66 /* comment-button@2x.png */; };
 		187BA50716F9782500438A66 /* contact-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 187BA4F716F9782500438A66 /* contact-button.png */; };
@@ -100,7 +101,7 @@
 		187C935516FBCBD1001821A9 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C935416FBCBD1001821A9 /* CoreDataManager.m */; };
 		18BBA50316F819C90043E019 /* ServiceOrderFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBA50216F819C90043E019 /* ServiceOrderFormViewController.m */; };
 		18BBA50616F81A620043E019 /* CommentIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBA50516F81A620043E019 /* CommentIndexViewController.m */; };
-		18BBE9BF16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18BBE9BD16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodeld */; };
+		18BBE9BF16FB10BC003A1E38 /* geoy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18BBE9BD16FB10BC003A1E38 /* geoy.xcdatamodeld */; };
 		18BBE9C816FB1351003A1E38 /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBE9C716FB1351003A1E38 /* Shop.m */; };
 		18BBE9CB16FB1351003A1E38 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBE9CA16FB1351003A1E38 /* Service.m */; };
 /* End PBXBuildFile section */
@@ -217,6 +218,8 @@
 		1858DC2B16F5E6FB0091AB6E /* ServiceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailViewController.m; sourceTree = "<group>"; };
 		1858DC2D16F5E9760091AB6E /* my-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my-tab.png"; sourceTree = "<group>"; };
 		1858DC2E16F5E9760091AB6E /* my-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my-tab@2x.png"; sourceTree = "<group>"; };
+		186E61C516FC180000798E15 /* Service+JSONFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Service+JSONFormat.h"; sourceTree = "<group>"; };
+		186E61C616FC180000798E15 /* Service+JSONFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Service+JSONFormat.m"; sourceTree = "<group>"; };
 		187BA4F516F9782500438A66 /* comment-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-button.png"; sourceTree = "<group>"; };
 		187BA4F616F9782500438A66 /* comment-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-button@2x.png"; sourceTree = "<group>"; };
 		187BA4F716F9782500438A66 /* contact-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contact-button.png"; sourceTree = "<group>"; };
@@ -243,7 +246,7 @@
 		18BBA50216F819C90043E019 /* ServiceOrderFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOrderFormViewController.m; sourceTree = "<group>"; };
 		18BBA50416F81A620043E019 /* CommentIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentIndexViewController.h; sourceTree = "<group>"; };
 		18BBA50516F81A620043E019 /* CommentIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentIndexViewController.m; sourceTree = "<group>"; };
-		18BBE9BE16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GEOYangcheModel.xcdatamodel; sourceTree = "<group>"; };
+		18BBE9BE16FB10BC003A1E38 /* geoy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = geoy.xcdatamodel; sourceTree = "<group>"; };
 		18BBE9C616FB1351003A1E38 /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
 		18BBE9C716FB1351003A1E38 /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
 		18BBE9C916FB1351003A1E38 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
@@ -279,8 +282,6 @@
 		1828505316F3D07C00166AF8 = {
 			isa = PBXGroup;
 			children = (
-				182850C916F3D5F100166AF8 /* CoreData.framework */,
-				182850C716F3D5BD00166AF8 /* QuartzCore.framework */,
 				1828506516F3D07C00166AF8 /* geoy */,
 				1828508C16F3D07C00166AF8 /* geoyTests */,
 				1828505E16F3D07C00166AF8 /* Frameworks */,
@@ -300,6 +301,8 @@
 		1828505E16F3D07C00166AF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				182850C916F3D5F100166AF8 /* CoreData.framework */,
+				182850C716F3D5BD00166AF8 /* QuartzCore.framework */,
 				1828505F16F3D07C00166AF8 /* UIKit.framework */,
 				1828506116F3D07C00166AF8 /* Foundation.framework */,
 				1828506316F3D07C00166AF8 /* CoreGraphics.framework */,
@@ -601,7 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				187C934F16FBC940001821A9 /* utils */,
-				18BBE9BD16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodeld */,
+				18BBE9BD16FB10BC003A1E38 /* geoy.xcdatamodeld */,
 				18BBE9C916FB1351003A1E38 /* Service.h */,
 				18BBE9CA16FB1351003A1E38 /* Service.m */,
 				18BBE9C616FB1351003A1E38 /* Shop.h */,
@@ -658,6 +661,8 @@
 				187C935116FBC940001821A9 /* CoreDataTableViewController.m */,
 				187C935316FBCBD1001821A9 /* CoreDataManager.h */,
 				187C935416FBCBD1001821A9 /* CoreDataManager.m */,
+				186E61C516FC180000798E15 /* Service+JSONFormat.h */,
+				186E61C616FC180000798E15 /* Service+JSONFormat.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -849,11 +854,12 @@
 				1806234F16F7758300C2CB0E /* ServiceGallaryCell.m in Sources */,
 				18BBA50316F819C90043E019 /* ServiceOrderFormViewController.m in Sources */,
 				18BBA50616F81A620043E019 /* CommentIndexViewController.m in Sources */,
-				18BBE9BF16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodeld in Sources */,
+				18BBE9BF16FB10BC003A1E38 /* geoy.xcdatamodeld in Sources */,
 				18BBE9C816FB1351003A1E38 /* Shop.m in Sources */,
 				18BBE9CB16FB1351003A1E38 /* Service.m in Sources */,
 				187C935216FBC940001821A9 /* CoreDataTableViewController.m in Sources */,
 				187C935516FBCBD1001821A9 /* CoreDataManager.m in Sources */,
+				186E61C716FC180000798E15 /* Service+JSONFormat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1058,13 +1064,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		18BBE9BD16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodeld */ = {
+		18BBE9BD16FB10BC003A1E38 /* geoy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				18BBE9BE16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodel */,
+				18BBE9BE16FB10BC003A1E38 /* geoy.xcdatamodel */,
 			);
-			currentVersion = 18BBE9BE16FB10BC003A1E38 /* GEOYangcheModel.xcdatamodel */;
-			path = GEOYangcheModel.xcdatamodeld;
+			currentVersion = 18BBE9BE16FB10BC003A1E38 /* geoy.xcdatamodel */;
+			path = geoy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

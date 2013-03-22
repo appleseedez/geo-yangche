@@ -22,7 +22,7 @@
         <relationship name="services" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="shop" inverseEntity="Service" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Shop" positionX="54" positionY="-85" width="128" height="133"/>
         <element name="Service" positionX="-236" positionY="-126" width="128" height="208"/>
+        <element name="Shop" positionX="54" positionY="-85" width="128" height="133"/>
     </elements>
 </model>

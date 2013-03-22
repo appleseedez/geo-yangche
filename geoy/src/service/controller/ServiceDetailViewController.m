@@ -128,7 +128,7 @@
 				[sender setImage:[UIImage imageNamed:@"goto-order"] forState:UIControlStateNormal];
 				sender.enabled = YES;
 			});
-			dispatch_release(queue);
+			
 		});
 		
 	}else{

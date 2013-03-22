@@ -24,4 +24,8 @@
 	self.imageView.animationImages =@[animateFrame0,animateFrame0,animateFrame0,animateFrame0,animateFrame0,animateFrame1,animateFrame1,animateFrame1,animateFrame1,animateFrame1,animateFrame2,animateFrame2,animateFrame2,animateFrame2,animateFrame2,animateFrame3,animateFrame3,animateFrame3,animateFrame3,animateFrame3,animateFrame4,animateFrame4,animateFrame4,animateFrame4,animateFrame4,animateFrame5,animateFrame5,animateFrame5,animateFrame5,animateFrame5,animateFrame6,animateFrame6,animateFrame6,animateFrame6,animateFrame6,animateFrame7,animateFrame7,animateFrame7,animateFrame7,animateFrame7,animateFrame0,animateFrame0,animateFrame0,animateFrame0,animateFrame0];
 	self.imageView.animationDuration = 1;
 }
+
+- (void)stepByStepButton{
+
+}
 @end

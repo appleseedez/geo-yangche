@@ -10,4 +10,5 @@
 
 @interface UIButton (animateIcon)
 - (void) cosplayActivityIndicator;
+- (void) stepByStepButton;
 @end

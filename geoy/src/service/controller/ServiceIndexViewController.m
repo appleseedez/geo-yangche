@@ -9,20 +9,26 @@
 #import "ServiceIndexViewController.h"
 #import "ServiceIndexCell.h"
 #import "UIButton+animateIcon.h"
+#import "CoreDataManager.h"
 @interface ServiceIndexViewController ()
-@property (nonatomic) NSArray* indexDataSet;
+@property (nonatomic,weak) UIManagedDocument* databaseDocument;
 
 @end
 
 @implementation ServiceIndexViewController
+//
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        
-    }
-    return self;
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	[self useDocument];
 }
 
 - (void)viewDidLoad
@@ -41,18 +47,18 @@
 
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-
-    return 10000;
-}
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//
+//    return 1;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//
+//    return 10000;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -74,12 +80,40 @@
 }
 
 
+- (void) setupFetchResultController{
+	
+}
+
 # pragma mark - actions
 /*
  返回Home界面
  */
 - (IBAction)backToRootPageAction:(UIButton *)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - core data operation
+/*
+	检查managedDocument是否状态正常 
+ */
+- (void) useDocument {
+	self.databaseDocument = [CoreDataManager share].managedDocument;
+	if (![[NSFileManager defaultManager] fileExistsAtPath:[self.databaseDocument.fileURL path]]) {
+		[self.databaseDocument saveToURL:self.databaseDocument.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+			[self setupFetchResultController];
+		}];
+	}else if (self.databaseDocument.documentState == UIDocumentStateClosed){
+		[self.databaseDocument openWithCompletionHandler:^(BOOL success) {
+			[self setupFetchResultController];
+		}];
+	}else if (self.databaseDocument.documentState == UIDocumentStateNormal){
+		[self setupFetchResultController];
+	}
+}
+
+- (void) fetchServiceData{
+	
 }
 
 /**

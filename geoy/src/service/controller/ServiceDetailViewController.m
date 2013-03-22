@@ -11,6 +11,7 @@
 #import "ServiceGallaryCell.h"
 @interface ServiceDetailViewController ()
 @property (nonatomic) NSMutableArray* protoypeCellHeight;
+@property (nonatomic) BOOL isSelected;
 @end
 
 @implementation ServiceDetailViewController
@@ -31,6 +32,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.protoypeCellHeight = [NSMutableArray arrayWithArray:@[@(160.0f),@(120.0f)]];
+	self.isSelected = NO;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +91,53 @@
 - (void)close:(UIButton *)sender{
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
+// 喜欢按钮
+- (void)toggleLikedState:(UIButton *)sender{
+	sender.enabled = NO;
+	if (self.isSelected == NO) {
+		dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		dispatch_async(queue, ^{
+			sleep(1);
+			dispatch_async(dispatch_get_main_queue(), ^{
+				self.isSelected = YES;
+				[sender setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
+				sender.enabled = YES;
+			});
+		});
+	}else{
+		dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		dispatch_async(queue, ^{
+			sleep(.5);
+			dispatch_async(dispatch_get_main_queue(), ^{
+				self.isSelected = NO;
+				[sender setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+				sender.enabled = YES;
+			});
+		});
+	}
+}
+// 加入购物车按钮
+- (void)toggleOrderState:(UIButton *)sender{
+	sender.enabled  = NO;
+	if (self.isSelected == NO) {
+		dispatch_queue_t queue = dispatch_queue_create("change the order state request", NULL);
+		dispatch_async(queue, ^{
+			sleep(.5);
+			dispatch_async(dispatch_get_main_queue(), ^{
+				self.isSelected = YES;
+				[sender setImage:[UIImage imageNamed:@"goto-order"] forState:UIControlStateNormal];
+				sender.enabled = YES;
+			});
+			dispatch_release(queue);
+		});
+		
+	}else{
+		sender.enabled = YES;
+		[self performSegueWithIdentifier:@"OrderModal" sender:self];
+	}
+}
+
+#pragma mark - condition segue
 
 #pragma mark - custom method
 /**
@@ -112,6 +162,7 @@
 			[self.protoypeCellHeight replaceObjectAtIndex:indexPath.row
 											   withObject:@([self.protoypeCellHeight[indexPath.row] floatValue] + cell.addressLabel.bounds.size.height - prototypeLabelHeight)];
 			[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+			
 		}
 		
 		

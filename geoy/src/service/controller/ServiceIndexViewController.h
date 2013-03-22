@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ServiceIndexViewController : UITableViewController
+#import "CoreDataTableViewController.h"
+@interface ServiceIndexViewController : CoreDataTableViewController
 
 - (IBAction)backToRootPageAction:(UIButton *)sender; // 返回home界面
 - (IBAction)fetchNewData:(UIButton*)sender;

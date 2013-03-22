@@ -10,4 +10,7 @@
 
 @interface ServiceDetailViewController : UITableViewController
 - (IBAction)close:(UIButton*)sender;
+- (IBAction)toggleLikedState:(UIButton*)sender;
+- (IBAction)toggleOrderState:(UIButton*)sender;
+
 @end
